@@ -1,0 +1,98 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light w-100 bg-warning border-warning"
+		style="border-bottom: 2px solid grey">
+		<div class="container">
+			<a class="navbar-brand" href="/welcome"><img
+				src="assets/images/pills-solid.svg" alt="" width="30" height="30">
+				ManageMed</a>
+
+			<div class="offcanvas offcanvas-start offcanvas-nav"
+				style="width: 20rem">
+
+				<div class="offcanvas-body pt-0 align-items-center">
+					<ul class="navbar-nav mx-auto align-items-lg-center">
+						<li class="nav-item"><a class="nav-link text-black" href="/home"
+							role="button" aria-expanded="false">Dashboard</a></li>
+						<li class="nav-item"><a class="nav-link text-black" href="AboutUs.html"
+							role="button" aria-expanded="false">About Us</a></li>
+						<li class="nav-item"><a class="nav-link text-black" href="/welcome#section4"
+							role="button" aria-expanded="false">Feedback</a></li>
+					</ul>
+					<div class="navbar-nav-wrap-content-end">
+						<!-- Navbar -->
+						<ul
+							class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
+							<li class="nav-item d-none d-sm-block"><a
+								class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait"
+								href="/viewcart"><svg xmlns="http://www.w3.org/2000/svg"
+										width="25" height="25" fill="black"
+										class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+											d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z" />
+</svg> <!-- <span class="fas fa-shopping-cart" data-fa-transform="shrink-7" style="font-size: 33px;"></span> Font Awesome fontawesome.com -->
+									<span id='cartcount' class="notification-indicator-number"></span></a>
+							</li>
+							<li class="nav-item dropdown"><a class="nav-link pe-0 ps-2"
+								id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+									<div class="avatar avatar-xl">
+										<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+											fill="black" class="bi bi-person-circle"
+											viewBox="0 0 16 16">
+                                <path
+												d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path fill-rule="evenodd"
+												d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>
+									</div>
+							</a>
+								<div class="dropdown-menu dropdown-caret dropdown-menu-end py-0"
+									aria-labelledby="navbarDropdownUser">
+									<div class="bg-white dark__bg-1000 rounded-2 py-2">
+										<a class="dropdown-item fw-bold text-warning" href="#!"> <svg
+												class="svg-inline--fa fa-crown fa-w-20 me-1"
+												aria-hidden="true" focusable="false" data-prefix="fas"
+												data-icon="crown" role="img"
+												xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
+												data-fa-i2svg="">
+                                    <path fill="currentColor"
+													d="M528 448H112c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm64-320c-26.5 0-48 21.5-48 48 0 7.1 1.6 13.7 4.4 19.8L476 239.2c-15.4 9.2-35.3 4-44.2-11.6L350.3 85C361 76.2 368 63 368 48c0-26.5-21.5-48-48-48s-48 21.5-48 48c0 15 7 28.2 17.7 37l-81.5 142.6c-8.9 15.6-28.9 20.8-44.2 11.6l-72.3-43.4c2.7-6 4.4-12.7 4.4-19.8 0-26.5-21.5-48-48-48S0 149.5 0 176s21.5 48 48 48c2.6 0 5.2-.4 7.7-.8L128 416h384l72.3-192.8c2.5.4 5.1.8 7.7.8 26.5 0 48-21.5 48-48s-21.5-48-48-48z"></path>
+                                </svg>
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="pages/user/profile.html">Profile
+											&amp; account</a>
+										<div class="dropdown-divider"></div>
+										<form action="/logout" method="POST">
+											<button class="dropdown-item" type="Submit">Logout</button>
+										</form>
+									</div>
+								</div></li>
+						</ul>
+						<!-- End Navbar -->
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</nav>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+</body>
+</html>

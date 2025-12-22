@@ -1,0 +1,37 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light w-100 bg-warning border-warning" style="border-bottom: 2px solid grey">
+      <div class="container">
+         <a class="navbar-brand" href="/welcome"><img src="assets/images/pills-solid.svg" alt="" width="30"
+			height="30">   ManageMed</a>
+         
+         <div class="offcanvas offcanvas-start offcanvas-nav" style="width: 20rem">
+            
+            <div class="offcanvas-body pt-0 align-items-center">
+               <ul class="navbar-nav mx-auto align-items-lg-center">
+                  <li class="nav-item">
+                     <a class="nav-link text-dark" href="/home" role="button" aria-expanded="false">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link text-dark" href="AboutUs.html" role="button" aria-expanded="false">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link text-dark" href="#section4" role="button" aria-expanded="false">Feedback</a>
+                  </li>
+               </ul>
+               <div class="mt-3 mt-lg-0 d-flex align-items-center">
+                  <a href="/login-page" class="btn btn-light mx-2">Login</a>
+                  <a href="/register-page" class="btn btn-primary bg-black border-black">Create account</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </nav>
+</body>
+</html>

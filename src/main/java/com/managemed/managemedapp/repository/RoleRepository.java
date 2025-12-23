@@ -1,15 +1,14 @@
 package com.managemed.managemedapp.repository;
-import com.managemed.managemedapp.model.User;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.managemed.managemedapp.model.Roles;
+
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface RoleRepository extends JpaRepository<Roles, Integer> {
 
-    Optional<User> findByUsername(String username);
-
+    Optional<Roles> findByRoleName(String roleName);
 }
-

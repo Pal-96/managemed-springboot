@@ -1,43 +1,39 @@
 package com.managemed.managemedapp.service;
 
-import java.sql.ResultSet;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.managemed.managemedapp.dao.DAOImpl;
+import com.managemed.managemedapp.model.User;
+import com.managemed.managemedapp.repository.UserRepository;
 import com.managemed.managemedapp.security.JWTUtil;
+import com.managemed.managemedapp.security.PasswordUtil;
 
 @Service
 public class LoginService {
 
+    @Autowired
+    UserRepository userRepository;
+
     public LoginResult authenticate(String username, String password) {
-
-        DAOImpl dao = DAOImpl.getInstance();
-
-        try {
-            String connectionResult = dao.Connection();
-            if (!"Connection Established".equals(connectionResult)) {
-                return LoginResult.failure();
-            }
-
-            String loginResult = dao.login(username, password);
-            if (!"Login Succssful".equals(loginResult)) {
-                return LoginResult.failure();
-            }
-
-            ResultSet rs = dao.getRole(username);
-            String role = rs.next() ? rs.getString(1) : "USER";
-
-            String token = JWTUtil.generateToken(username, role);
-            return LoginResult.success(token);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        boolean result = userRepository.findByUsername(username)
+                .map(user -> PasswordUtil.verifyPassword(password, user.getPassword()))
+                .orElse(false);
+        if (!result) {
             return LoginResult.failure();
         }
+        String role = getRole(username);
+        String token = JWTUtil.generateToken(username, role);
+        return LoginResult.success(token);
     }
 
-    // Simple result wrapper
+    public String getRole(String username) {
+        return userRepository.findByUsername(username)
+            .map(User::getRoleName)
+            .orElseThrow(() ->
+                new IllegalStateException("Role not found for user: " + username)
+            );
+    }
+
     public static class LoginResult {
         private final boolean success;
         private final String token;

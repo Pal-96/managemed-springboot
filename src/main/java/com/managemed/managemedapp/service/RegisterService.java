@@ -1,86 +1,91 @@
 package com.managemed.managemedapp.service;
-
-import java.sql.SQLException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.managemed.managemedapp.dao.DAOImpl;
-import com.managemed.managemedapp.model.Person;
+import com.managemed.managemedapp.model.Roles;
 import com.managemed.managemedapp.model.User;
+import com.managemed.managemedapp.repository.AddUserProcedureRepository;
+import com.managemed.managemedapp.repository.RoleRepository;
+import com.managemed.managemedapp.repository.UserRepository;
 import com.managemed.managemedapp.security.PasswordUtil;
 
 @Service
 public class RegisterService {
 
-    private final DAOImpl dao;
-
-    public RegisterService() {
-        // Keeping your singleton DAO intact for now
-        this.dao = DAOImpl.getInstance();
-    }
-
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    AddUserProcedureRepository procedureRepository;
+    
     public boolean registerCustomer(String firstname, String lastname,
                                     String username, String password) {
-
-        Person person = buildPerson(firstname, lastname, username, password);
-
-        try {
-            String result = dao.Connection();
-            if ("Connection Established".equals(result)) {
-                result = dao.Register(person, "Customer");
-                return "User Registered".equals(result);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (userRepository.existsById(username)) {
+            return false;
         }
-        return false;
+        Roles role = roleRepository.findByRoleName("Customer")
+                .orElseThrow(() -> new IllegalArgumentException("Invalid role")); 
+        User user = buildUser(firstname, lastname, username, password, role);
+        procedureRepository.addUser(
+                user.getUsername(),
+                user.getFirstname(),
+                user.getLastname(),
+                user.getPassword(),
+                role.getRoleId()
+        );
+
+        return true;
     }
 
     public boolean addUser(String firstname, String lastname,
-                           String username, String password, String role) {
-
-        Person person = buildPerson(firstname, lastname, username, password);
-
-        try {
-            String result = dao.Register(person, role);
-            return "User Registered".equals(result);
-        } catch (Exception e) {
-            e.printStackTrace();
+                           String username, String password, String roleName) {
+        if (userRepository.existsById(username)) {
+            return false;
         }
-        return false;
+        Roles role = roleRepository.findByRoleName(roleName)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid role"));
+        User user = buildUser(firstname, lastname, username, password, role);
+
+        procedureRepository.addUser(
+                user.getUsername(),
+                user.getFirstname(),
+                user.getLastname(),
+                user.getPassword(),
+                role.getRoleId()
+        );
+
+        return true;
     }
 
     public void editUser(String firstname, String lastname,
                          String username, String roleName) {
 
-        try {
-            dao.editUser(firstname, lastname, username, roleName);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        Roles role = roleRepository.findByRoleName(roleName)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid role"));
+
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setRole(role);
+        userRepository.save(user);
     }
 
     public void deleteUser(String username) {
-        try {
-            dao.deleteUser(username);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        userRepository.deleteById(username);
     }
 
-    private Person buildPerson(String firstname, String lastname,
-                               String username, String password) {
+    private User buildUser(String firstname, String lastname,
+                               String username, String password, Roles role) {
 
-        Person person = new Person();
         User user = new User();
-
-        person.setFrstname(firstname);
-        person.setLastname(lastname);
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
 
         user.setUsername(username);
         user.setPassword(PasswordUtil.hashPwd(password));
-
-        person.setUser(user);
-        return person;
+        user.setRole(role);
+        return user;
     }
 }

@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,11 +14,12 @@ import com.managemed.managemedapp.service.LoginService;
 @Controller
 public class LoginController {
 
-    private final LoginService loginService;
+    @Autowired
+    LoginService loginService;
 
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
-    }
+    // public LoginController(LoginService loginService) {
+    //     this.loginService = loginService;
+    // }
 
     @PostMapping("/login")
     public String handleLogin(

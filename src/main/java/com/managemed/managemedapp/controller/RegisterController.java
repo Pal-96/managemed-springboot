@@ -2,22 +2,23 @@ package com.managemed.managemedapp.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.managemed.managemedapp.service.RegisterService;
 
 @Controller
 public class RegisterController {
 
-    private final RegisterService registerService;
+    @Autowired
+    RegisterService registerService;
 
-    public RegisterController(RegisterService registerService) {
-        this.registerService = registerService;
-    }
+    // public RegisterController(RegisterService registerService) {
+    //     this.registerService = registerService;
+    // }
 
     @GetMapping("/register-page")
     public String showRegisterPage() {
@@ -49,7 +50,7 @@ public class RegisterController {
 
             case "edit":
                 registerService.editUser(firstname, lastname, username, selectedRole);
-                return "redirect:/ManageUsers.jsp";
+                return "redirect:/manageusers";
 
             case "add":
                 boolean added = registerService.addUser(

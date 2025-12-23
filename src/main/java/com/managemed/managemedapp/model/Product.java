@@ -1,15 +1,29 @@
 package com.managemed.managemedapp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 // import javax.persistence.Entity;
 
 @Component
-// @Entity
+@Entity
+@Table(name = "PRODUCT")
 public class Product {
+    @Id
+    @Column(name = "PRODUCT")
     private String product;
+
+    @Column(name = "QUANTITY")
     private int quantity;
+
+    @Column(name = "UNITPRICE")
     private int unitprice;
+
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public String getProduct() {

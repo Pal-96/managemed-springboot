@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Properties;
-import com.managemed.managemedapp.model.Person;
 import com.managemed.managemedapp.model.Product;
+import com.managemed.managemedapp.model.User;
 import com.managemed.managemedapp.security.PasswordUtil;
 
 public class DAOImpl {
@@ -65,11 +65,11 @@ public class DAOImpl {
 		return result;
 	}
 
-	public String Register(Person person, String role) throws ClassNotFoundException {
-		String hashPwd = person.getUser().getPassword();
-		String username = person.getUser().getUsername();
-		String frstname = person.getFrstname();
-		String lastname = person.getLastname();
+	public String Register(User user, String role) throws ClassNotFoundException {
+		String hashPwd = user.getPassword();
+		String username = user.getUsername();
+		String frstname = user.getFirstname();
+		String lastname = user.getLastname();
 		String query1 = "select role_id from roles where role_name = ?";
 		try {
 			st = con.prepareStatement(query1);

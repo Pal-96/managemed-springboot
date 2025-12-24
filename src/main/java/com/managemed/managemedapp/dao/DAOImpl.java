@@ -48,52 +48,52 @@ public class DAOImpl {
 		return result;
 	}
 
-	public String login(String username, String password) throws SQLException {
+	// public String login(String username, String password) throws SQLException {
 
-		String query = "select password from USERTB where username=?";
-		st = con.prepareStatement(query);
-		st.setString(1, username);
-		ResultSet rs = st.executeQuery();
-		if (rs.next()) {
-			String storedPwd = rs.getString("password");
-			boolean isPwdValid = PasswordUtil.verifyPassword(password, storedPwd);
-			if (isPwdValid) {
-				result = "Login Succssful";
-			} else
-				result = "No Data";
-		}
-		return result;
-	}
+	// 	String query = "select password from USERTB where username=?";
+	// 	st = con.prepareStatement(query);
+	// 	st.setString(1, username);
+	// 	ResultSet rs = st.executeQuery();
+	// 	if (rs.next()) {
+	// 		String storedPwd = rs.getString("password");
+	// 		boolean isPwdValid = PasswordUtil.verifyPassword(password, storedPwd);
+	// 		if (isPwdValid) {
+	// 			result = "Login Succssful";
+	// 		} else
+	// 			result = "No Data";
+	// 	}
+	// 	return result;
+	// }
 
-	public String Register(User user, String role) throws ClassNotFoundException {
-		String hashPwd = user.getPassword();
-		String username = user.getUsername();
-		String frstname = user.getFirstname();
-		String lastname = user.getLastname();
-		String query1 = "select role_id from roles where role_name = ?";
-		try {
-			st = con.prepareStatement(query1);
-			st.setString(1, role);
-			ResultSet rs = st.executeQuery();
-			if (rs.next()) {
-				int role_id = rs.getInt(1);
-				String query2 = "{call add_user(?,?,?,?,?)}";
-				CallableStatement st = con.prepareCall(query2);
-				st.setString(1, username);
-				st.setString(2, frstname);
-				st.setString(3, lastname);
-				st.setString(4, hashPwd);
-				st.setInt(5, role_id);
-				st.execute();
-				result = "User Registered";
-			}
-		} catch (SQLException e) {
-			if (e.getErrorCode() == 20001) {
-				result = e.getMessage();
-			}
-		}
-		return result;
-	}
+	// public String Register(User user, String role) throws ClassNotFoundException {
+	// 	String hashPwd = user.getPassword();
+	// 	String username = user.getUsername();
+	// 	String frstname = user.getFirstname();
+	// 	String lastname = user.getLastname();
+	// 	String query1 = "select role_id from roles where role_name = ?";
+	// 	try {
+	// 		st = con.prepareStatement(query1);
+	// 		st.setString(1, role);
+	// 		ResultSet rs = st.executeQuery();
+	// 		if (rs.next()) {
+	// 			int role_id = rs.getInt(1);
+	// 			String query2 = "{call add_user(?,?,?,?,?)}";
+	// 			CallableStatement st = con.prepareCall(query2);
+	// 			st.setString(1, username);
+	// 			st.setString(2, frstname);
+	// 			st.setString(3, lastname);
+	// 			st.setString(4, hashPwd);
+	// 			st.setInt(5, role_id);
+	// 			st.execute();
+	// 			result = "User Registered";
+	// 		}
+	// 	} catch (SQLException e) {
+	// 		if (e.getErrorCode() == 20001) {
+	// 			result = e.getMessage();
+	// 		}
+	// 	}
+	// 	return result;
+	// }
 
 	public int insert(Product product) throws SQLException {
 		int result = 0;
@@ -130,41 +130,41 @@ public class DAOImpl {
 		return rs;
 	}
 
-	public int addcart(String product, int quantity, String username) throws SQLException {
-		String query2 = "select unitprice from stock where UPPER(product)=?";
-		st = con.prepareStatement(query2);
-		st.setString(1, product.toUpperCase());
-		ResultSet rs = st.executeQuery();
-		int result = 0;
-		if (rs.next()) {
-			price = rs.getInt(1);
-			String query3 = "select product from cart where UPPER(product)=? and username=? and order_id is null";
-			st = con.prepareStatement(query3);
-			st.setString(1, product.toUpperCase());
-			st.setString(2, username);
-			if (st.executeUpdate() > 0) {
-				String query4 = "update cart set quantity=?, price=?*? where UPPER(product)=? and username=? and order_id is null";
-				st = con.prepareStatement(query4);
-				st.setInt(1, quantity);
-				st.setInt(2, quantity);
-				st.setInt(3, price);
-				st.setString(4, product.toUpperCase());
-				st.setString(5, username);
-				result = st.executeUpdate();
-			} else {
-				String query5 = "{call add_cart(?,?,?,?,?)}";
-				CallableStatement st = con.prepareCall(query5);
-				st.setString(1, product);
-				st.setInt(2, quantity);
-				st.setInt(3, price * quantity);
-				st.setString(4, username);
-				st.registerOutParameter(5, java.sql.Types.NUMERIC);
-				st.execute();
-				result = st.getInt(5);
-			}
-		}
-		return result;
-	}
+	// public int addcart(String product, int quantity, String username) throws SQLException {
+	// 	String query2 = "select unitprice from stock where UPPER(product)=?";
+	// 	st = con.prepareStatement(query2);
+	// 	st.setString(1, product.toUpperCase());
+	// 	ResultSet rs = st.executeQuery();
+	// 	int result = 0;
+	// 	if (rs.next()) {
+	// 		price = rs.getInt(1);
+	// 		String query3 = "select product from cart where UPPER(product)=? and username=? and order_id is null";
+	// 		st = con.prepareStatement(query3);
+	// 		st.setString(1, product.toUpperCase());
+	// 		st.setString(2, username);
+	// 		if (st.executeUpdate() > 0) {
+	// 			String query4 = "update cart set quantity=?, price=?*? where UPPER(product)=? and username=? and order_id is null";
+	// 			st = con.prepareStatement(query4);
+	// 			st.setInt(1, quantity);
+	// 			st.setInt(2, quantity);
+	// 			st.setInt(3, price);
+	// 			st.setString(4, product.toUpperCase());
+	// 			st.setString(5, username);
+	// 			result = st.executeUpdate();
+	// 		} else {
+	// 			String query5 = "{call add_cart(?,?,?,?,?)}";
+	// 			CallableStatement st = con.prepareCall(query5);
+	// 			st.setString(1, product);
+	// 			st.setInt(2, quantity);
+	// 			st.setInt(3, price * quantity);
+	// 			st.setString(4, username);
+	// 			st.registerOutParameter(5, java.sql.Types.NUMERIC);
+	// 			st.execute();
+	// 			result = st.getInt(5);
+	// 		}
+	// 	}
+	// 	return result;
+	// }
 
 	public ResultSet viewcart(String username) throws SQLException {
 		String query1 = "select * from cart where username=? and (cart_status = ? OR cart_status is null) and order_id is null";
@@ -239,22 +239,22 @@ public class DAOImpl {
 		return st.getInt(2);
 	}
 
-	public int removecart(String product) throws SQLException {
-		String query1 = "select product from cart where product=?";
-		st = con.prepareStatement(query1);
-		st.setString(1, product);
-		if (st.executeUpdate() == 0) {
-			row_exist = 0;
-		} else {
-			String query4 = "delete from cart where UPPER(product)=?";
-			st = con.prepareStatement(query4);
-			st.setString(1, product.toUpperCase());
-			if (st.executeUpdate() > 0) {
-				row_exist = 1;
-			}
-		}
-		return row_exist;
-	}
+	// public int removecart(String product) throws SQLException {
+	// 	String query1 = "select product from cart where product=?";
+	// 	st = con.prepareStatement(query1);
+	// 	st.setString(1, product);
+	// 	if (st.executeUpdate() == 0) {
+	// 		row_exist = 0;
+	// 	} else {
+	// 		String query4 = "delete from cart where UPPER(product)=?";
+	// 		st = con.prepareStatement(query4);
+	// 		st.setString(1, product.toUpperCase());
+	// 		if (st.executeUpdate() > 0) {
+	// 			row_exist = 1;
+	// 		}
+	// 	}
+	// 	return row_exist;
+	// }
 
 	public int deletestock(String product) throws SQLException {
 		String query1 = "delete from stock where UPPER(product)=?";

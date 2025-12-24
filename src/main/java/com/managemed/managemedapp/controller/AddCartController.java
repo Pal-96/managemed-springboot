@@ -3,6 +3,7 @@ package com.managemed.managemedapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +18,12 @@ import oracle.jdbc.proxy.annotation.Post;
 @Controller
 public class AddCartController {
 
-    private final AddCartService addCartService;
+    @Autowired
+    AddCartService addCartService;
 
-    public AddCartController(AddCartService addCartService) {
-        this.addCartService = addCartService;
-    }
+    // public AddCartController(AddCartService addCartService) {
+    //     this.addCartService = addCartService;
+    // }
 
     @PostMapping("/addtocart")
     public String handleAddToCart(

@@ -44,7 +44,7 @@ function handleDeleteStock(button) {
 	console.log(title);
 	console.log(action);
 
-	let response = fetch('addrem', {
+	let response = fetch('/addrem', {
 		method: 'POST',
 		header: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({

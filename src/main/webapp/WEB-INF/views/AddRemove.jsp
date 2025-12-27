@@ -58,7 +58,7 @@ if(quantity<0 )
 }
 %>
 
-<form action="addrem" method="post">
+<form action="/addrem" method="post">
 
 Product <input type="text" name="product">    
 

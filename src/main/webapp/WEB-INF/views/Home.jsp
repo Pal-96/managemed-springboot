@@ -182,7 +182,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form action="addrem" method="post" target="myIframe">
+					<form action="/addrem" method="post" target="myIframe">
 						<div class="mb-3">
 							<label for="product" class="col-form-label">Product</label> <input
 								type="text" class="form-control" id="product" name="product">
@@ -209,7 +209,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-primary" name="action"
-								value="add">Add</button>
+								value="add" data-bs-dismiss="modal">Add</button>
 						</div>
 					</form>
 				</div>

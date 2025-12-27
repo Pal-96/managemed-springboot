@@ -12,11 +12,5 @@ import com.managemed.managemedapp.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    // @Query("""
-    //     select p.unitprice
-    //     from Stock p
-    //     where upper(p.product) = upper(:product)
-    // """)
-    // Integer findUnitPriceProduct(@Param("product") String product);
     Optional<Product> findByProduct(String product);
 }

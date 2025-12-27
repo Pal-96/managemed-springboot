@@ -95,25 +95,25 @@ public class DAOImpl {
 	// 	return result;
 	// }
 
-	public int insert(Product product) throws SQLException {
-		int result = 0;
-		try {
-			String query1 = "{call add_stock(?,?,?,?,?)}";
-			CallableStatement st = con.prepareCall(query1);
-			st.setString(1, product.getProduct());
-			st.setInt(2, product.getQuantity());
-			st.setInt(3, product.getUnitprice());
-			st.setString(4, product.getDescription());
-			st.registerOutParameter(5, java.sql.Types.NUMERIC);
-			st.execute();
-			result = st.getInt(5);
-		} catch (SQLException e) {
-			if (e.getErrorCode() == 20002) {
-				result = 0;
-			}
-		}
-		return result;
-	}
+	// public int insert(Product product) throws SQLException {
+	// 	int result = 0;
+	// 	try {
+	// 		String query1 = "{call add_stock(?,?,?,?,?)}";
+	// 		CallableStatement st = con.prepareCall(query1);
+	// 		st.setString(1, product.getProduct());
+	// 		st.setInt(2, product.getQuantity());
+	// 		st.setInt(3, product.getUnitprice());
+	// 		st.setString(4, product.getDescription());
+	// 		st.registerOutParameter(5, java.sql.Types.NUMERIC);
+	// 		st.execute();
+	// 		result = st.getInt(5);
+	// 	} catch (SQLException e) {
+	// 		if (e.getErrorCode() == 20002) {
+	// 			result = 0;
+	// 		}
+	// 	}
+	// 	return result;
+	// }
 
 	public ResultSet displayAll() throws SQLException {
 		String query1 = "select * from stock where quantity>0";
@@ -256,31 +256,31 @@ public class DAOImpl {
 	// 	return row_exist;
 	// }
 
-	public int deletestock(String product) throws SQLException {
-		String query1 = "delete from stock where UPPER(product)=?";
-		st = con.prepareStatement(query1);
-		st.setString(1, product.toUpperCase());
-		int count = st.executeUpdate();
-		return count;
-	}
+	// public int deletestock(String product) throws SQLException {
+	// 	String query1 = "delete from stock where UPPER(product)=?";
+	// 	st = con.prepareStatement(query1);
+	// 	st.setString(1, product.toUpperCase());
+	// 	int count = st.executeUpdate();
+	// 	return count;
+	// }
 
-	public int update(String product, int quantity, int unitprice, String description) throws SQLException {
-		String query1 = "select * from stock where upper(product)=?";
-		st = con.prepareStatement(query1);
-		st.setString(1, product.toUpperCase());
-		ResultSet rs = st.executeQuery();
-		int count = 0;
-		if (rs.next()) {
-			String query2 = "update stock set quantity=?, unitprice=?, description=? where upper(product)=?";
-			st = con.prepareStatement(query2);
-			st.setInt(1, quantity);
-			st.setInt(2, unitprice);
-			st.setString(3, description);
-			st.setString(4, product.toUpperCase());
-			count = st.executeUpdate();
-		}
-		return count;
-	}
+	// public int update(String product, int quantity, int unitprice, String description) throws SQLException {
+	// 	String query1 = "select * from stock where upper(product)=?";
+	// 	st = con.prepareStatement(query1);
+	// 	st.setString(1, product.toUpperCase());
+	// 	ResultSet rs = st.executeQuery();
+	// 	int count = 0;
+	// 	if (rs.next()) {
+	// 		String query2 = "update stock set quantity=?, unitprice=?, description=? where upper(product)=?";
+	// 		st = con.prepareStatement(query2);
+	// 		st.setInt(1, quantity);
+	// 		st.setInt(2, unitprice);
+	// 		st.setString(3, description);
+	// 		st.setString(4, product.toUpperCase());
+	// 		count = st.executeUpdate();
+	// 	}
+	// 	return count;
+	// }
 
 	public int createOrder(String username, int orderQty, String orderStatus, LocalDate date) throws SQLException {
 		int result = 0;

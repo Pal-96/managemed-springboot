@@ -143,7 +143,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="addrem" method="post">
+										<form action="/addrem" method="post">
 											<div class="mb-3">
 												<label for="product" class="col-form-label">Product</label>
 												<input type="text" class="form-control" disabled="disabled" id="product">

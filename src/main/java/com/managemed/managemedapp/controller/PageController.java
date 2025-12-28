@@ -48,6 +48,11 @@ public class PageController {
         return "ManageUsers";
     }
 
+    @GetMapping("/manageroles")
+    public String manageRoles() {
+        return "ManageRoles";
+    }
+
     @GetMapping("/success")
     public String paymentSuccess() {
         return "success";

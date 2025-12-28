@@ -4,12 +4,13 @@ function handleDeleteRole(button) {
 	let action = "delete";
 	console.log(roleId);
 	console.log(action);
-	let response = fetch('addrole', {
+	let response = fetch('/addrole', {
 		method: 'POST',
-		header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({
 			roleId: roleId,
-			action: action
+			action: action,
+			_method: 'DELETE'
 		})
 	}).then(response => {
 		if (response.ok) {

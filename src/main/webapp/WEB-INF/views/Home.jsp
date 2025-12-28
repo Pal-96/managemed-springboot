@@ -127,7 +127,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 					<li></li>
 					<li class="nav-item bg-light border rounded-pill"><a
 						class="nav-link" href="javascript:void(0);"
-						onclick="loadContent('ManageRoles.jsp')"> <i
+						onclick="loadContent('/manageroles')"> <i
 							class="align-bottom bx bx-user"></i> <span class="ms-2">Manage
 								Role</span>
 					</a></li>

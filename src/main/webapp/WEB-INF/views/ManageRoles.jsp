@@ -106,7 +106,7 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form action="addrole" method="post">
+					<form action="/addrole" method="post">
 						<div class="mb-3">
 							<label for="role" class="col-form-label">Role Name</label> <input
 								type="text" class="form-control" id="role" name="role">

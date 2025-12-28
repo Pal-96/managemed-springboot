@@ -19,11 +19,11 @@ public class Roles {
     )
     @SequenceGenerator(
         name = "roles_seq",
-        sequenceName = "ROLES_SEQ",
+        sequenceName = "role_id_seq",
         allocationSize = 1
     )
     @Column(name = "ROLE_ID")
-    private Integer roleId;
+    private int roleId;
 
     @Column(name = "ROLE_NAME", nullable = false, unique = true)
     private String roleName;

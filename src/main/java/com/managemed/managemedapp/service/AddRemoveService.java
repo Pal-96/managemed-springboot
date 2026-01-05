@@ -1,5 +1,6 @@
 package com.managemed.managemedapp.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -48,9 +49,9 @@ public class AddRemoveService {
     }
 
     private void deleteProduct(String productTitle, HttpSession session) {
-        Optional<Product> product = productRepository.findByProduct(productTitle);
-        if (product.isPresent()) {
-            productRepository.delete(product.get());
+        List<Product> product = productRepository.findByProduct(productTitle);
+        if (!product.isEmpty()) {
+            productRepository.delete(product.get(0));
             session.setAttribute("productdeleted", true);
         } else {
             session.setAttribute("productnotfound", true);
@@ -59,9 +60,9 @@ public class AddRemoveService {
 
     private void editProduct(String productTitle, Integer quantity, Integer unitprice, String description,
             HttpSession session) {
-        Optional<Product> product = productRepository.findByProduct(productTitle);
-        if (product.isPresent()) {
-            Product existingProduct = product.get();
+        List<Product> product = productRepository.findByProduct(productTitle);
+        if (!product.isEmpty()) {
+            Product existingProduct = product.get(0);
             existingProduct.setQuantity(quantity);
             existingProduct.setUnitprice(unitprice);
             existingProduct.setDescription(description);
@@ -74,7 +75,7 @@ public class AddRemoveService {
     }
 
     private void addProduct(String productTitle, Integer quantity, Integer unitprice, String description, HttpSession session) {
-        if (productRepository.findByProduct(productTitle).isPresent()) {
+        if (!productRepository.findByProduct(productTitle).isEmpty()) {
             session.setAttribute("productexists", true);
             return;
         }

@@ -2,6 +2,7 @@ package com.managemed.managemedapp.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -40,28 +41,30 @@ public class AddCartService {
 		System.out.println("Inside Med Cart Product:" + productName);
 		System.out.println("Added?:" + addtocart);
 		System.out.println("Med added:" + productName);
-		this.quantity = Integer.parseInt(cartquan);
+		System.out.println(cartquan);
+		this.quantity = Integer.parseInt(cartquan.trim());
 		if (quantity<=0) {
 			session.setAttribute("med", "not added");
 			return false;
 		}
-
+		System.out.println(this.quantity);
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
-		Product product = productRepository.findByProduct(productName)
-                .orElseThrow(() -> new IllegalStateException("Product not found"));
-
-		int unitPrice = product.getUnitprice();
+		List<Product> product = productRepository.findByProduct(productName);
+		if (product.isEmpty()) {
+			throw new IllegalStateException("Product not found");
+		}
+		int unitPrice = product.get(0).getUnitprice();
 
 		Cart cart = cartRepository
                 .findByUserUsernameAndProductProductAndOrderIdIsNull(username, productName)
                 .orElse(new Cart());
 
         cart.setUser(user);
-        cart.setProduct(product);
-        cart.setQuantity(quantity);
-        cart.setPrice(quantity * unitPrice);
+        cart.setProduct(product.get(0));
+        cart.setQuantity(this.quantity);
+        cart.setPrice(this.quantity * unitPrice);
         cart.setCartStatus(null);
         cart.setOrderId(null);
 

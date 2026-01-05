@@ -32,11 +32,11 @@ function updateDropdown(element) {
 	let dropdownButton = element.closest('.quantity');
 	let div = element.closest('.d-flex');
 	let quan = dropdownButton.querySelector('.dropdown-toggle');
-	let newQuantity = element.textContent;
+	let newQuantity = element.dataset.quantity;
 	quan.textContent = newQuantity;
 	let product = div.querySelector('.product').innerText;
 	let addtocart = "addtocart";
-	let response = fetch('addtocart', {
+	let response = fetch('/addtocart', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'

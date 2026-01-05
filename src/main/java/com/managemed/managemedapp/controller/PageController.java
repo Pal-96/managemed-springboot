@@ -13,30 +13,30 @@ public class PageController {
         return "OK";
     }
 
-    @GetMapping("/welcome")
-    public String welcomePage() {
-        return "Welcome";
-    }
+    // @GetMapping("/welcome")
+    // public String welcomePage() {
+    //     return "Welcome";
+    // }
 
     @GetMapping("/login-page")
     public String loginPage() {
         return "Login";
     }
 
-    @GetMapping("/home")
-    public String homePage() {
-        return "Home";
-    }
+    // @GetMapping("/home")
+    // public String homePage() {
+    //     return "Home";
+    // }
 
-    @GetMapping("/displayall")
-    public String DisplayAll() {
-        return "DisplayAll";
-    }
+    // @GetMapping("/displayall")
+    // public String DisplayAll() {
+    //     return "DisplayAll";
+    // }
 
-    @GetMapping("/viewcart")
-    public String viewCart() {
-        return "ViewCart";
-    }
+    // @GetMapping("/viewcart")
+    // public String viewCart() {
+    //     return "ViewCart";
+    // }
 
     @GetMapping("/myorders")
     public String myOrders() {

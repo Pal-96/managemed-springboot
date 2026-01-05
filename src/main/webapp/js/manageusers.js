@@ -40,7 +40,7 @@ function handleDeleteUser(button) {
 	let action = "delete";
 	console.log(action);
 
-	let response = fetch('register', {
+	let response = fetch('/register', {
 		method: 'POST',
 		header: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({

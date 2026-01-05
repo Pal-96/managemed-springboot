@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="com.managemed.managemedapp.util.CookieUtil"%>
-<%@ page import="com.managemed.managemedapp.security.JWTUtil"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,20 +16,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<%
-	String token = CookieUtil.getToken(request);
-
-	if (token == null)
-		response.sendRedirect(request.getContextPath() + "/login-page");
-	else {
-		String username = JWTUtil.getUsername(token);
-		String role = JWTUtil.getRole(token);
-		System.out.println(role);
-	%>
 	<jsp:include page="/WEB-INF/views/navbar-after-login.jsp" />
-	<%
-response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-%>
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
@@ -47,7 +33,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 				</button>
 			</div>
 			<div class="col d-flex">
-				<%if (role.equals("Admin")) {%>
+				<c:if test="${role eq 'Admin'}">
 				<div class="col text-end cpr-7">
 					<button type="button" class="btn btn-outline-dark"
 						data-bs-toggle="modal" data-bs-target="#addModel"
@@ -60,9 +46,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 						</svg>
 					</button>
 				</div>
-				<%
-				}
-				%>
+				</c:if>
 				<div class="col text-end search">
 					<form id="searchForm" action="/displayall" method="get"
 						class="input-group mb-3" target="myIframe">
@@ -98,18 +82,13 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 					d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
 				</svg>
 				<div class="ms-3">
-					<h5 class="mb-0"><%=username%></h5>
-					<%
-					if (role.equals("Admin")) {
-					%>
-					<small>Application Admin</small>
-					<%
-					} else if (role.equals("Customer")) {
-					%>
-					<small>Personal account</small>
-					<%
-					}
-					%>
+					<h5 class="mb-0">${username}</h5>
+					<c:if test="${role eq 'Admin'}">
+						<small>Application Admin</small>
+					</c:if>
+					<c:if test="${role eq 'Customer'}">
+						<small>Personal account</small>
+					</c:if>
 				</div>
 			</div>
 			<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
@@ -118,10 +97,10 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		<div class="offcanvas-body">
 			<div class="collapse d-md-block" id="collapseAccountMenu">
 				<ul class="nav flex-column nav-account">
-					<%if (role.equals("Admin")) {%>
+					<c:if test="${role eq 'Admin'}">
 					<li class="nav-item bg-light border rounded-pill"><a
 						class="nav-link" href="javascript:void(0);"
-						onclick="loadContent('DisplayAll.jsp')"> <i
+						onclick="loadContent('/displayall')"> <i
 							class="align-bottom bx bx-home"></i> <span class="ms-2">Manage
 								Stock</span></a></li>
 					<li></li>
@@ -133,13 +112,12 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 					</a></li>
 					<li class="nav-item bg-light border rounded-pill"><a
 						class="nav-link" href="javascript:void(0);"
-						onclick="loadContent('ManageUsers.jsp')"> <i
+						onclick="loadContent('/manageusers')"> <i
 							class="align-bottom bx bx-user"></i> <span class="ms-2">Manage
 								Users</span>
 					</a></li>
-					<%
-					} else if (role.equals("Customer")) {
-					%>
+					</c:if>
+					<c:if test="${role eq 'Customer'}">
 					<li class="nav-item bg-light border rounded-pill"><a
 						class="nav-link" href="javascript:void(0);"
 						onclick="loadContent('/displayall')"> <i
@@ -156,9 +134,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 							class="align-bottom bx bx-user"></i> <span class="ms-2">My
 								Orders</span>
 					</a></li>
-					<%
-					}
-					%>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -223,10 +199,6 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ppJrBfQZ6Nx69ul5kxDwepP6ct3U7y5rVZHZB4Xtmbw8H6hoF+jNQaIfFAl3sHUt"
 		crossorigin="anonymous"></script>
-
-	<%
-	}
-	%>
 </body>
 
 

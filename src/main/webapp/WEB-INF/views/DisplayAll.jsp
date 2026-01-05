@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.managemed.managemedapp.dao.*"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.managemed.managemedapp.util.CookieUtil"%>
-<%@ page import="com.managemed.managemedapp.security.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,43 +17,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
-	<%
-	ResultSet rs = null;
-	String role = null;
-	String token = CookieUtil.getToken(request);
-	String cartcount = "0";
-	if (token == null)
-		response.sendRedirect(request.getContextPath() + "/login-page");
-
-	else {
-		role = JWTUtil.getRole(token);
-		DAOImpl dao;
-		String product = request.getParameter("product");
-		String deletestock = request.getParameter("deletestock");
-		System.out.println("Product: " + product);
-		String action = (String) session.getAttribute("action");
-		if (product == null || product == "" || action == "deletestock") {
-			dao = DAOImpl.getInstance();
-			rs = dao.displayAll();
-		} else {
-			dao = DAOImpl.getInstance();
-			rs = dao.display(product);
-		}
-
-		String med = "" + session.getAttribute("med");
-		String quantity = "" + session.getAttribute("quan");
-		cartcount = "" + session.getAttribute("cartcount");
-	%>
 	<div id="liveAlertPlaceholder"></div>
 	<div class="row row-cols-3 g-4">
-
-		<%
-		while (rs.next()) {
-		%>
+		<c:forEach var="p" items="${products}">
 		<div class="col">
 			<div class="card text-bg-light">
-			<%if (role.equals("Customer")) {%>
+			<c:if test="${role eq 'Customer'}">
 				<div class="card-header">
 					<div class="container text-end">
 
@@ -75,27 +41,27 @@
 
 					</div>
 				</div>
-				<%} %>
+				</c:if>
 				<img src="assets/images/products.png" class="card-img-top" height="250px" alt="...">
 				<div class="card-body">
 
-					<h5 class="card-title"><%=rs.getString(1)%></h5>
-					<p class="card-text"><%=rs.getString(4)%></p>
+					<h5 class="card-title">${p.product}</h5>
+					<p class="card-text">${p.description}</p>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item text-bg-light">Quantity: <%=rs.getString(2)%></li>
-						<li class="list-group-item text-bg-light">Unit Price: $<%=rs.getString(3)%></li>
+						<li class="list-group-item text-bg-light">Quantity: ${p.quantity}</li>
+						<li class="list-group-item text-bg-light">Unit Price: ${p.unitprice}</li>
 					</ul>
 				</div>
-				<%if (role.equals("Admin")) { %>
+				<c:if test="${role eq 'Admin'}">
 				<div class="card-footer text-body-secondary text-end">
 					<div class="d-flex">
 						<div>
 							<button type="button" class="btn" data-bs-toggle="modal"
 								data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-								data-product="<%=rs.getString(1)%>"
-								data-description="<%=rs.getString(4)%>"
-								data-quantity="<%=rs.getString(2)%>"
-								data-unitprice="<%=rs.getString(3)%>" data-action="edit"
+								data-product="${p.product}"
+								data-description="${p.description}"
+								data-quantity="${p.quantity}"
+								data-unitprice="${p.unitprice}" data-action="edit"
 								onclick="populateModal(this)">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
 									fill="#0d6efd" class="bi bi-pencil-square"
@@ -123,15 +89,12 @@
 						</div>
 					</div>
 				</div>
-				<%} %>
+				</c:if>
 			</div>
 			<br />
 		</div>
 
-		<%
-		}
-		}
-		%>
+		</c:forEach>
 	</div>
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -180,14 +143,5 @@
 							</div>
 						</div>
 	<script src="/js/displayall.js"></script>
-	<%
-	if (session.getAttribute("productexists") != null) {
-		System.out.println("Inside home:"+session.getAttribute("productexists"));
-		session.removeAttribute("productexists");
-	%>
-	<script src="/js/home.js"></script>
-	<%
-	}
-	%>
 </body>
 </html>

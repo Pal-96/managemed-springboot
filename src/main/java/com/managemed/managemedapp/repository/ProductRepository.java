@@ -1,5 +1,6 @@
 package com.managemed.managemedapp.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,5 @@ import com.managemed.managemedapp.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    Optional<Product> findByProduct(String product);
+    List<Product> findByProduct(String product);
 }

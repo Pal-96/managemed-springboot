@@ -1,7 +1,9 @@
 # Application Demo
 View the live demo of the app below:
 
-https://drive.google.com/file/d/1TPxxLFk1WDfCEUjmIWoAjzObCjljO9Dd/view?usp=sharing
+<!-- https://drive.google.com/file/d/1TPxxLFk1WDfCEUjmIWoAjzObCjljO9Dd/view?usp=sharing -->
+
+![Demo of checkout flow](demo.gif)
 
 # Description
 ## Customer Features:

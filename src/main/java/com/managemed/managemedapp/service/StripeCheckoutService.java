@@ -3,10 +3,15 @@ package com.managemed.managemedapp.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.managemed.managemedapp.dao.DAOImpl;
+import com.managemed.managemedapp.model.Cart;
+import com.managemed.managemedapp.model.Order;
+import com.managemed.managemedapp.model.Payment;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
@@ -14,21 +19,30 @@ import com.stripe.param.checkout.SessionCreateParams;
 @Service
 public class StripeCheckoutService {
 
+        @Autowired
+        AddCartService addCartService;
+        @Autowired
+        OrderService orderService;
+        @Autowired
+        PaymentService paymentService;
+
     public String createCheckoutSession(
             String username,
-            int shippingPrice,
+            double shippingPrice,
             String domainUrl) throws SQLException, StripeException {
 
-        DAOImpl dao = DAOImpl.getInstance();
-        LocalDate currentDate = LocalDate.now();
+        // DAOImpl dao = DAOImpl.getInstance();
+        // LocalDate currentDate = LocalDate.now();
 
-        dao.reserveCart(username);
-        ResultSet rs = dao.viewcart(username);
+        List<Cart> reservedItems = addCartService.reserveCart(username);
+        
+        // ResultSet rs = dao.viewcart(username);
 
-        if (rs != null) {
-            int orderQty = dao.getCartCount(username);
-            dao.createOrder(username, orderQty, "PENDING", currentDate);
-            dao.proceedPayment(currentDate, username);
+        if (reservedItems != null) {
+            int orderQty = addCartService.getCartCount(username);
+            Order order = orderService.createPendingOrder(username, orderQty);
+            paymentService.createOrUpdatePendingPayment(order.getId());
+        //     dao.proceedPayment(currentDate, username);
         }
 
         SessionCreateParams.Builder paramsBuilder =
@@ -37,10 +51,10 @@ public class StripeCheckoutService {
                         .setSuccessUrl(domainUrl + "/success")
                         .setCancelUrl(domainUrl + "/cancel");
 
-        while (rs.next()) {
-            String productName = rs.getString(2);
-            int quantity = rs.getInt(3);
-            long totalPrice = rs.getInt(4);
+        for (Cart cart : reservedItems) {
+            String productName = cart.getProduct().getProduct();
+            int quantity = cart.getQuantity();
+            long totalPrice = cart.getPrice();
             long unitPrice = totalPrice / quantity;
 
             paramsBuilder.addLineItem(

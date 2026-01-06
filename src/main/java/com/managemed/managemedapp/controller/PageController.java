@@ -53,10 +53,10 @@ public class PageController {
         return "ManageRoles";
     }
 
-    @GetMapping("/success")
-    public String paymentSuccess() {
-        return "success";
-    }
+    // @GetMapping("/success")
+    // public String paymentSuccess() {
+    //     return "success";
+    // }
 
     @GetMapping("/cancel")
     public String paymentCancel() {

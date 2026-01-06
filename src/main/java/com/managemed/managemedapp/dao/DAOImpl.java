@@ -166,24 +166,24 @@ public class DAOImpl {
 	// 	return result;
 	// }
 
-	public ResultSet viewcart(String username) throws SQLException {
-		String query1 = "select * from cart where username=? and (cart_status = ? OR cart_status is null) and order_id is null";
-		st = con.prepareStatement(query1, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		st.setString(1, username);
-		st.setString(2, "RESERVED");
-		ResultSet rs = st.executeQuery();
-		return rs;
-	}
+	// public ResultSet viewcart(String username) throws SQLException {
+	// 	String query1 = "select * from cart where username=? and (cart_status = ? OR cart_status is null) and order_id is null";
+	// 	st = con.prepareStatement(query1, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	// 	st.setString(1, username);
+	// 	st.setString(2, "RESERVED");
+	// 	ResultSet rs = st.executeQuery();
+	// 	return rs;
+	// }
 
-	public int getCartCount(String username) throws SQLException {
-		int count = 0;
-		ResultSet rs = viewcart(username);
-		if (rs.last()) {
-			count = rs.getRow();
-			rs.beforeFirst();
-		}
-		return count;
-	}
+	// public int getCartCount(String username) throws SQLException {
+	// 	int count = 0;
+	// 	ResultSet rs = viewcart(username);
+	// 	if (rs.last()) {
+	// 		count = rs.getRow();
+	// 		rs.beforeFirst();
+	// 	}
+	// 	return count;
+	// }
 
 	public int paymentDetails(String username) throws SQLException {
 		String query1 = "select SUM(PRICE) from cart where username = ? and order_id is null and cart_status is null";
@@ -372,25 +372,25 @@ public class DAOImpl {
 		}
 	}
 
-	public ResultSet custRpt() throws SQLException {
-		String query1 = "select count(username) from usertb where role_id = (select role_id from roles where role_name=?)";
-		st = con.prepareStatement(query1);
-		st.setString(1, "Customer");
-		return st.executeQuery();
-	}
+	// public ResultSet custRpt() throws SQLException {
+	// 	String query1 = "select count(username) from usertb where role_id = (select role_id from roles where role_name=?)";
+	// 	st = con.prepareStatement(query1);
+	// 	st.setString(1, "Customer");
+	// 	return st.executeQuery();
+	// }
 
-	public ResultSet totSalesRpt() throws SQLException {
-		String query1 = "select count(order_id) from ordertb where order_status=?";
-		st = con.prepareStatement(query1);
-		st.setString(1, "COMPLETED");
-		return st.executeQuery();
-	}
+	// public ResultSet totSalesRpt() throws SQLException {
+	// 	String query1 = "select count(order_id) from ordertb where order_status=?";
+	// 	st = con.prepareStatement(query1);
+	// 	st.setString(1, "COMPLETED");
+	// 	return st.executeQuery();
+	// }
 
-	public ResultSet totProductRpt() throws SQLException {
-		String query1 = "select count(product) from stock where quantity>0";
-		st = con.prepareStatement(query1);
-		return st.executeQuery();
-	}
+	// public ResultSet totProductRpt() throws SQLException {
+	// 	String query1 = "select count(product) from stock where quantity>0";
+	// 	st = con.prepareStatement(query1);
+	// 	return st.executeQuery();
+	// }
 
 	public ResultSet getRole(String username) throws SQLException {
 		String query = "select role_name from roles where role_id = (select role_id from usertb where username = ?)";

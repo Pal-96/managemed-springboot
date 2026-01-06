@@ -29,7 +29,7 @@ public class StripeCheckoutController {
 
     @PostMapping("/create-checkout-session")
     public String createCheckoutSession(
-            @RequestParam("shipping") int shippingPrice,
+            @RequestParam("shipping") double shippingPrice,
             HttpServletRequest request) {
 
         try {

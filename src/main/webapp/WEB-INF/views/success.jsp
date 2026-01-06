@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ page import="com.managemed.managemedapp.dao.*"%>
-	<%@ page import="com.managemed.managemedapp.service.*"%>
-	<%@ page import="com.managemed.managemedapp.security.*"%>
-	<%@ page import="com.managemed.managemedapp.util.*"%>
-<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +8,6 @@
 <link rel="stylesheet" href="./assets/css/stripe-style.css">
 </head>
 <body>
-	<%
-	DAOImpl dao = DAOImpl.getInstance();
-	String token = CookieUtil.getToken(request);
-	String username = JWTUtil.getUsername(token);
-	int result = dao.proceedSale(username);
-	%>
 	<section>
 		<p>Hooray! Payment successful. Thank you for shopping with ManageMed!
 		We would be happy to hear from you.</p>

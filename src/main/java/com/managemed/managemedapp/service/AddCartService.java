@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.managemed.managemedapp.dao.DAOImpl;
 import com.managemed.managemedapp.model.Cart;
 import com.managemed.managemedapp.model.Product;
@@ -89,4 +90,35 @@ public class AddCartService {
         session.setAttribute("med", "removed");
         session.setAttribute("cartcount", cartCount);
 	}
+
+	@Transactional
+    public List<Cart> reserveCart(String username) {
+
+        List<Cart> cartItems =
+                cartRepository.findByUserUsernameAndOrderIdIsNull(username);
+
+        for (Cart cart : cartItems) {
+            Product product = cart.getProduct();
+
+            if (product.getQuantity() >= cart.getQuantity()) {
+                product.setQuantity(
+                        product.getQuantity() - cart.getQuantity());
+                cart.setCartStatus("RESERVED");
+            } else {
+                cart.setCartStatus("UNAVAILABLE");
+            }
+
+            productRepository.save(product);
+            cartRepository.save(cart);
+        }
+
+        return cartRepository
+                .findByUserUsernameAndCartStatusAndOrderIdIsNull(
+                        username, "RESERVED");
+    }
+
+    public int getCartCount(String username) {
+        return (int) cartRepository
+                .countByUserUsernameAndOrderIdIsNull(username);
+    }
 }

@@ -5,10 +5,6 @@ View the live demo of the app below:
 
 ![Demo of checkout flow](demo.gif)
 
-## Demo
-
-https://github.com/Pal-96/managemed-springboot/blob/main/ManageMedDemo.mp4
-
 # Description
 ## Customer Features:
 - User Authentication: Customers can register and log in to access their accounts.

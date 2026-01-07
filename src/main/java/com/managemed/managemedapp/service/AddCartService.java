@@ -113,7 +113,7 @@ public class AddCartService {
         }
 
         return cartRepository
-                .findByUserUsernameAndCartStatusAndOrderIdIsNull(
+                .findByUserUsernameAndCartStatus(
                         username, "RESERVED");
     }
 

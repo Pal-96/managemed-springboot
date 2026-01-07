@@ -7,12 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PageController {
 
-    @GetMapping("/ping")
-    @ResponseBody
-    public String ping() {
-        return "OK";
-    }
-
     // @GetMapping("/welcome")
     // public String welcomePage() {
     //     return "Welcome";
@@ -58,13 +52,13 @@ public class PageController {
     //     return "success";
     // }
 
-    @GetMapping("/cancel")
-    public String paymentCancel() {
-        return "cancel";
-    }
+    // @GetMapping("/cancel")
+    // public String paymentCancel() {
+    //     return "cancel";
+    // }
 
-    @GetMapping("/paymenterror")
-    public String paymentError() {
-        return "PaymentError";
-    }
+    // @GetMapping("/paymenterror")
+    // public String paymentError() {
+    //     return "PaymentError";
+    // }
 }

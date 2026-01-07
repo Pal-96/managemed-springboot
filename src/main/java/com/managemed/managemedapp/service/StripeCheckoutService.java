@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ import com.managemed.managemedapp.dao.DAOImpl;
 import com.managemed.managemedapp.model.Cart;
 import com.managemed.managemedapp.model.Order;
 import com.managemed.managemedapp.model.Payment;
+import com.managemed.managemedapp.model.User;
+import com.managemed.managemedapp.repository.OrderRepository;
+import com.managemed.managemedapp.repository.UserRepository;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
@@ -25,6 +29,10 @@ public class StripeCheckoutService {
         OrderService orderService;
         @Autowired
         PaymentService paymentService;
+        @Autowired
+        OrderRepository orderRepository;
+        @Autowired
+        UserRepository userRepository;
 
     public String createCheckoutSession(
             String username,
@@ -40,7 +48,15 @@ public class StripeCheckoutService {
 
         if (reservedItems != null) {
             int orderQty = addCartService.getCartCount(username);
-            Order order = orderService.createPendingOrder(username, orderQty);
+            Optional<User> user = userRepository.findByUsername(username);
+            Order order = orderRepository.findFirstByUserAndOrderStatus(
+                    user.get(),
+                    "PENDING"
+            ).orElse(null);
+        if (order == null) {
+                order = orderService.createPendingOrder(username, orderQty);
+        }
+        //     Order order = orderService.createPendingOrder(username, orderQty);
             paymentService.createOrUpdatePendingPayment(order.getId());
         //     dao.proceedPayment(currentDate, username);
         }

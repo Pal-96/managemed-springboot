@@ -40,7 +40,7 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
 
         List<Cart> reservedCartItems =
-                cartRepository.findByUserUsernameAndCartStatusAndOrderIdIsNull(
+                cartRepository.findByUserUsernameAndCartStatus(
                         username, "RESERVED");
 
         for (Cart cart : reservedCartItems) {

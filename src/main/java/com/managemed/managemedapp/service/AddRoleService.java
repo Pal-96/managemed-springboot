@@ -21,7 +21,7 @@ public class AddRoleService {
             }
 
             Roles newRole = new Roles();
-            newRole.setRole(roleName);
+            newRole.setRoleName(roleName);
 			roleRepository.save(newRole);
 		}
 
@@ -31,7 +31,7 @@ public class AddRoleService {
             if(role.isPresent()) {
                 Roles existingRole = role.get();
                 // Update the role as needed
-                existingRole.setRole(roleName);
+                existingRole.setRoleName(roleName);
                 roleRepository.save(existingRole);
             }
         }

@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.managemed.managemedapp.dao.*"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.managemed.managemedapp.util.*"%>
-<%@ page import="com.managemed.managemedapp.security.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,17 +17,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<%
-	String token = CookieUtil.getToken(request);
-	String cartcount = "0";
-	if (token == null)
-		response.sendRedirect(request.getContextPath() + "/login-page");
-	else {
-		String username = JWTUtil.getUsername(token);
-		DAOImpl dao = DAOImpl.getInstance();
-		ResultSet rs = dao.getOrders(username);
-		System.out.println("My order:" +username);
-	%>
 	<div>
 		<div class="mb-5">
 			<h1>My Orders</h1>
@@ -47,27 +32,19 @@
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					<%
-					while (rs.next()) {
-					%>
+					<c:forEach var="order" items="${orders}">
 					<tr class="orow">
-						<td><%=rs.getString(1)%></td>
-						<td><%=rs.getInt(2)%></td>
-						<td><%=rs.getInt(3)%></td>
-						<td><%=rs.getDate(4)%></td>
+						<td>${order.product}</td>
+						<td>${order.quantity}</td>
+						<td>${order.price}</td>
+						<td>${order.orderDate}</td>
 						
 						
 					</tr>
-					<%
-					}
-					%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<%
-	}
-	%>
-
 </body>
 </html>

@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.managemed.managemedapp.dao.*"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.managemed.managemedapp.service.*"%>
-<%@ page import="com.managemed.managemedapp.security.*"%>
-<%@ page import="com.managemed.managemedapp.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +16,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<%
-	ResultSet rs1 = null;
-	String role = null;
-	String token = CookieUtil.getToken(request);
-	if (token == null)
-		response.sendRedirect(request.getContextPath() + "/login-page");
-	else {
-		DAOImpl dao = DAOImpl.getInstance();
-		rs1 = dao.getRoles();
-	%>
 	<div class="container">
 		<div class="row">
 			<div class="col text-end mb-4 mt-3">
@@ -57,16 +42,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-					while (rs1.next()) {
-					%>
+					<c:forEach var="role" items="${roles}">
 					<tr class="tbrow">
-						<td id="roleId"><%=rs1.getInt(1)%></td>
-						<td id="roleName"><%=rs1.getString(2)%></td>
+						<td id="roleId">${role.roleId}</td>
+						<td id="roleName">${role.roleName}</td>
 						<td><button type="button" class="btn" data-bs-toggle="modal"
 								data-bs-target="#addModel" data-bs-whatever="@mdo"
-								data-roleId="<%=rs1.getInt(1)%>"
-								data-roleName="<%=rs1.getString(2)%>" data-action="edit"
+								data-roleId="${role.roleId}"
+								data-roleName="${role.roleName}" data-action="edit"
 								onclick="populateModal(this)">
 								<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
 									fill="#0d6efd" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -89,9 +72,7 @@
 							</button>
 						</td>
 					</tr>
-					<%
-					}
-					%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -126,9 +107,6 @@
 			</div>
 		</div>
 	</div>
-	<%
-	}
-	%>
 	<script src="./js/manageroles.js"></script>
 </body>
 </html>

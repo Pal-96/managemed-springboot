@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.managemed.managemedapp.dto.OrderItemDTO;
 import com.managemed.managemedapp.model.Cart;
 import com.managemed.managemedapp.model.Order;
 import com.managemed.managemedapp.model.User;
@@ -49,6 +50,10 @@ public class OrderService {
         }
 
         return savedOrder;
+    }
+
+    public List<OrderItemDTO> getUserOrders(String username) {
+        return cartRepository.findPurchasedOrders(username);
     }
     
 }

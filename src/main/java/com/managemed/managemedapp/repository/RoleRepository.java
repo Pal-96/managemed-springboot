@@ -1,5 +1,6 @@
 package com.managemed.managemedapp.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,5 @@ import com.managemed.managemedapp.model.Roles;
 public interface RoleRepository extends JpaRepository<Roles, Integer> {
 
     Optional<Roles> findByRoleName(String roleName);
+    List<Roles> findByRoleNameNot(String roleName);
 }

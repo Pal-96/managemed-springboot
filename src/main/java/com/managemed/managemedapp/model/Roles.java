@@ -32,11 +32,11 @@ public class Roles {
         return roleId;
     }
 
-    public void setRole(String roleName) {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public String getRole() {
+    public String getRoleName() {
         return roleName;
     }
 }

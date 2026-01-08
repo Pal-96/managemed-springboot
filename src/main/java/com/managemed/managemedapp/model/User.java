@@ -86,7 +86,7 @@ public class User{
     }
 
     public String getRoleName() {
-        return role.getRole();
+        return role.getRoleName();
     }
 
 

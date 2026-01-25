@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.managemed.managemedapp.dao.*"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.managemed.managemedapp.service.*"%>
-<%@ page import="com.managemed.managemedapp.security.*"%>
-<%@ page import="com.managemed.managemedapp.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <html>
@@ -22,20 +17,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<%
-	ResultSet rs1 = null;
-	ResultSet rs2 = null;
-	String role = null;
-	String token = CookieUtil.getToken(request);
-	String cartcount = "0";
-	if (token == null)
-		response.sendRedirect(request.getContextPath() + "/login-page");
-
-	else {
-		DAOImpl dao = DAOImpl.getInstance();
-		rs1 = dao.getUsers();
-		rs2 = dao.getRoles();
-	%>
 	<div class="container">
 		<div class="row">
 			<div class="col text-end mb-4 mt-3">
@@ -64,21 +45,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-					while (rs1.next()) {
-					%>
+					<c:forEach var="user" items="${users}">
 					<tr class="tbrowuser">
-						<td><%=rs1.getString(2)%></td>
-						<td><%=rs1.getString(3)%></td>
-						<td id="usertb"><%=rs1.getString(1)%></td>
-						<td><%=rs1.getString(4)%></td>
+						<td>${user.firstname}</td>
+						<td>${user.lastname}</td>
+						<td id="usertb">${user.username}</td>
+						<td>${user.role.roleName}</td>
 						<td><button type="button" class="btn" data-bs-toggle="modal"
 								data-bs-target="#addModel" data-bs-whatever="@mdo"
-								data-fn="<%=rs1.getString(2)%>"
-								data-ln="<%=rs1.getString(3)%>"
-								data-un="<%=rs1.getString(1)%>"
-								data-role="<%=rs1.getString(4)%>"
-								data-pw="<%=rs1.getString(5)%>" data-action="edit"
+								data-fn="${user.firstname}"
+								data-ln="${user.lastname}"
+								data-un="${user.username}"
+								data-role="${user.role.roleName}"
+								data-pw="${user.password}" data-action="edit"
 								onclick="populateModal(this)">
 								<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
 									fill="#0d6efd" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -101,9 +80,7 @@
 							</button>
 						</td>
 					</tr>
-					<%
-					}
-					%>
+					</c:forEach>
 
 				</tbody>
 			</table>
@@ -127,14 +104,10 @@
 								aria-expanded="false" required>Role</button>
 
 							<ul class="dropdown-menu">
-								<%
-								while (rs2.next()) {
-								%>
+								<c:forEach var="role" items="${roles}">
 								<li><a class="dropdown-item" href="#"
-									onclick="setRole(this)"><%=rs2.getString(2)%></a></li>
-								<%
-								}
-								%>
+									onclick="setRole(this)">${role.roleName}</a></li>
+								</c:forEach>
 							</ul>
 						</div>
 						<input type="hidden" id="selectedRole" name="selectedRole"
@@ -154,7 +127,7 @@
 								type="text" class="form-control" id="username" name="username"
 								required>
 						</div>
-						<input type="hidden" id="hid-username" name="username">
+						<input type="hidden" id="hid-username" name="Origusername">
 						<div>
 							<label for="password" class="col-form-label">Password</label>
 						</div>
@@ -185,10 +158,5 @@
 		</div>
 	</div>
 	<script src="./js/manageusers.js"></script>
-	<%
-	}
-	%>
-
-
 </body>
 </html>

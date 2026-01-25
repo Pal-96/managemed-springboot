@@ -11,9 +11,4 @@ public class PageController {
     public String loginPage() {
         return "Login";
     }
-
-    @GetMapping("/manageusers")
-    public String manageUsers() {
-        return "ManageUsers";
-    }
 }

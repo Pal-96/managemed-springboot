@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.managemed.managemedapp.model.Roles;
+import com.managemed.managemedapp.model.User;
 import com.managemed.managemedapp.repository.RoleRepository;
 
 @Service

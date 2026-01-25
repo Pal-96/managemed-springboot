@@ -1,37 +1,39 @@
 @charset "ISO-8859-1";
 
 .placement {
-	margin-top: 20vh;
-	align-content: center;
-	}
-.placement-login {
-	margin-top: 15mm;
-	align-content: center;
+    margin-top: 20vh;
+    align-content: center;
 }
+
+.placement-login {
+    margin-top: 15mm;
+    align-content: center;
+}
+
 .placement-register {
-	margin-top: 10mm;
-	
+    margin-top: 10mm;
+
 }
 
 .container-login {
-	height: 100vh;
-	align-items: center;
-	text-align: center;
-	color: black;
+    height: 100vh;
+    align-items: center;
+    text-align: center;
+    color: black;
 }
 
 .custsignin {
-padding-left: 10in;
+    padding-left: 10in;
 }
 
 .btn-quan {
-	width: 50px;
-	border-radius: 3mm;
-	border-color: #dee2e6;
+    width: 50px;
+    border-radius: 3mm;
+    border-color: #dee2e6;
 }
 
 .item-of-cart {
-	padding-top: 1.5rem;
+    padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #e9ecef;
     background-color: rgb(237, 237, 237);
@@ -41,82 +43,172 @@ padding-left: 10in;
 }
 
 .custrow {
-	width: 50cm;
+    width: 50cm;
 }
 
 .carttitle {
-	padding-left: 1cm;
+    padding-left: 1cm;
 }
 
 .col-lg-8 {
-	width: 55%;
+    width: 55%;
 }
 
 .cust-cont {
-	width: 100vw;
+    width: 100vw;
 }
 
 .checkout {
-	height: 50px;
-  background: #0d6efd;
-  color: white;
-  width: 100%;
-  font-size: 14px;
-  border: 0;
-  font-weight: 500;
-  cursor: pointer;
-  letter-spacing: 0.6;
-  border-radius: 0 0 6px 6px;
-  transition: all 0.2s ease;
-  box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    height: 50px;
+    background: #0d6efd;
+    color: white;
+    width: 100%;
+    font-size: 14px;
+    border: 0;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.6;
+    border-radius: 0 0 6px 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
 }
 
 .cmt-7 {
-	padding-top: 1in;
+    padding-top: 1in;
 }
 
 .cpr-7 {
-	padding-right: 5px;
+    padding-right: 5px;
 }
 
 .display-7 {
-	font-size: large;
-	line-height: 1.2;
+    font-size: large;
+    line-height: 1.2;
 }
+
 .display-8 {
-	font-size: medium;
-	line-height: 1;
-	font-weight: 100;
+    font-size: medium;
+    line-height: 1;
+    font-weight: 100;
 }
 
 .pl-4 {
-	padding-left: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 .mr-4 {
-	margin-right: 3rem;
+    margin-right: 3rem;
 }
 
 .mr-5 {
-	margin-right: 1.2rem;
+    margin-right: 1.2rem;
 }
 
 .pl-6 {
-	padding-left: 25rem;
+    padding-left: 25rem;
 }
 
 .welcomeimg {
-	height: 360px;
+    height: 360px;
 }
 
 .pl-5 {
-	padding-left: 15rem;
+    padding-left: 15rem;
 }
 
 .pr-5 {
-	padding-right: 15rem;
+    padding-right: 15rem;
 }
 
 .bg-feedback {
-	background-color:#62b5e859;
+    background-color: #62b5e859;
+}
+
+.chat-container {
+    width: 320px;
+    height: 400px;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+#chat-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: #0d6efd;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 10000;
+}
+
+.chat-header {
+    padding: 12px;
+    background: #0d6efd;
+    color: white;
+    border-radius: 12px 12px 0 0;
+    font-weight: bold;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 8px;
+    border-top: 1px solid #ddd;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#send-chat {
+    margin-left: 6px;
+    padding: 8px 12px;
+    border: none;
+    background: #0d6efd;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.chat-msg {
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    max-width: 80%;
+}
+
+.chat-msg.user {
+    background: #0d6efd;
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-msg.bot {
+    background: #f1f1f1;
+    color: #333;
+    align-self: flex-start;
 }

@@ -11,18 +11,18 @@ Click below image👇
 
 # Description
 ## Customer Features:
-- User Authentication: Customers can register and log in to access their accounts.
-- Product Browsing: Easily browse through a wide range of products.
-- Product Search: Search for specific products quickly and efficiently.
-- Shopping Cart Management: Add products to the shopping cart and manage the cart's contents.
-- Concurrent Checkout: Multiple users can check out and purchase items simultaneously with real-time access to stock.
-- Secure Payment: Seamlessly complete purchases with secure payment option.
-- AI-Powered Chat Assistant: An integrated AI assistant, built using Spring AI and the OpenAI chat model, allows users to interact conversationally for assistance and general queries.
-- Real-time Feedback: Users can email candid feedback or concerns to the application admin.
+🔐 **User Authentication:** Customers can register and log in to access their accounts.
+🤖 **AI-Powered Chat Assistant:** An integrated AI assistant, built using Spring AI and the OpenAI chat model, allows users to interact conversationally for assistance and general queries.
+🛍️ **Product Browsing:** Easily browse through a wide range of products.
+🔍 **Product Search:** Search for specific products quickly and efficiently.
+🛒 **Shopping Cart Management:** Add products to the shopping cart and manage the cart's contents.
+⚡ **Concurrent Checkout:** Multiple users can check out and purchase items simultaneously with real-time access to stock.
+💳 **Secure Payment:** Seamlessly complete purchases with secure payment option.
+📩 **Real-time Feedback:** Users can email candid feedback or concerns to the application admin.
 
 ## Admin Features:
-- Stock Management: Administrators can add, edit, remove, and view stock levels.
-- User and Role Management: Admins can manage user accounts and assign roles, ensuring role-based access control for enhanced security and functionality.
+📦 Stock Management: Administrators can add, edit, remove, and view stock levels.
+👥 User and Role Management: Admins can manage user accounts and assign roles, ensuring role-based access control for enhanced security and functionality.
 
 # Database setup
 Refer the sql-scripts directory for the database setup.

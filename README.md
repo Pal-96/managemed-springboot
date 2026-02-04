@@ -3,9 +3,11 @@ View the live demo of the app below:
 
 <!-- https://drive.google.com/file/d/1TPxxLFk1WDfCEUjmIWoAjzObCjljO9Dd/view?usp=sharing -->
 
-![Demo of checkout flow](demo.gif)
+<!-- ![Demo of checkout flow](demo.gif) -->
 
-[![Video Title](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)](https://www.youtube.com/watch?v=JWWk7ynBtNw)
+<!-- [![Video Title](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)](https://www.youtube.com/watch?v=JWWk7ynBtNw) -->
+
+[![Video Title](thumbnail.png)](https://drive.google.com/file/d/1TPxxLFk1WDfCEUjmIWoAjzObCjljO9Dd/view?usp=sharing)
 
 # Description
 ## Customer Features:

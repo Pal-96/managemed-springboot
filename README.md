@@ -5,6 +5,8 @@ View the live demo of the app below:
 
 ![Demo of checkout flow](demo.gif)
 
+![Watch demo](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)
+
 # Description
 ## Customer Features:
 - User Authentication: Customers can register and log in to access their accounts.

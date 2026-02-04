@@ -5,7 +5,7 @@ View the live demo of the app below:
 
 ![Demo of checkout flow](demo.gif)
 
-![Watch demo](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)
+[![Video Title](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)](https://www.youtube.com/watch?v=JWWk7ynBtNw)
 
 # Description
 ## Customer Features:

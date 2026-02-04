@@ -28,9 +28,9 @@ Click below image👇
 📩 **Real-time Feedback:** Users can email candid feedback or concerns to the application admin.
 
 ## Admin Features:
-📦 Stock Management: Administrators can add, edit, remove, and view stock levels.
+📦 **Stock Management:** Administrators can add, edit, remove, and view stock levels.
 
-👥 User and Role Management: Admins can manage user accounts and assign roles, ensuring role-based access control for enhanced security and functionality.
+👥 **User and Role Management:** Admins can manage user accounts and assign roles, ensuring role-based access control for enhanced security and functionality.
 
 # Database setup
 Refer the sql-scripts directory for the database setup.

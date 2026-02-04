@@ -7,7 +7,7 @@ View the live demo of the app below:
 
 <!-- [![Video Title](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)](https://www.youtube.com/watch?v=JWWk7ynBtNw) -->
 
-[![Video Title](thumbnail.png)](https://drive.google.com/file/d/1TPxxLFk1WDfCEUjmIWoAjzObCjljO9Dd/view?usp=sharing)
+[![Video Title](thumbnail.png)](https://drive.google.com/file/d/1Eve0LB12N_AusmLNQ9lBaK5ZJVRVyGaY/view?usp=sharing)
 
 # Description
 ## Customer Features:

@@ -17,6 +17,7 @@ Click below image👇
 - Shopping Cart Management: Add products to the shopping cart and manage the cart's contents.
 - Concurrent Checkout: Multiple users can check out and purchase items simultaneously with real-time access to stock.
 - Secure Payment: Seamlessly complete purchases with secure payment option.
+- AI-Powered Chat Assistant: An integrated AI assistant, built using Spring AI and the OpenAI chat model, allows users to interact conversationally for assistance and general queries.
 - Real-time Feedback: Users can email candid feedback or concerns to the application admin.
 
 ## Admin Features:

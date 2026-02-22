@@ -351,7 +351,7 @@
 				</div>
 
 				<div class="chat-container">
-					<div class="chat-header">AI Assistant</div>
+					<div class="chat-header">Ask PharmAssist</div>
 
 					<div class="chat-body"></div>
 

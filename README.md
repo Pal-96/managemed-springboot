@@ -1,5 +1,5 @@
 # Application Demo
-Check out the whole demo [here](https://drive.google.com/file/d/1Eve0LB12N_AusmLNQ9lBaK5ZJVRVyGaY/view?usp=sharing)
+Check out the whole demo [here](https://drive.google.com/file/d/1Eve0LB12N_AusmLNQ9lBaK5ZJVRVyGaY/view?usp=sharing) ▶️
 
 <!-- https://drive.google.com/file/d/1TPxxLFk1WDfCEUjmIWoAjzObCjljO9Dd/view?usp=sharing -->
 

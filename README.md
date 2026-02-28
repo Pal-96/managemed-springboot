@@ -7,7 +7,7 @@ Click below to play the whole demo👇
 
 <!-- [![Video Title](https://img.youtube.com/vi/JWWk7ynBtNw/0.jpg)](https://www.youtube.com/watch?v=JWWk7ynBtNw) -->
 
-<!-- [![Video Title](demo.gif)](https://drive.google.com/file/d/19-lKRgodUug330_44D_kLwpUvLq1eUUB/view?usp=drive_link) -->
+[![Video Title](demo.gif)](https://drive.google.com/file/d/19-lKRgodUug330_44D_kLwpUvLq1eUUB/view?usp=drive_link)
 
 # Description
 ## Customer Features:

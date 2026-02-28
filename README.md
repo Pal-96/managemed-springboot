@@ -13,7 +13,7 @@ Check out the application demo [here](https://drive.google.com/file/d/1Eve0LB12N
 ## Customer Features:
 🔐 **User Authentication:** Customers can register and log in to access their accounts.
 
-🤖 **AI-Powered Chat Assistant:** An integrated AI assistant, built using Spring AI and the OpenAI chat model, allows users to interact conversationally for assistance and general queries.
+🤖 **RAG-Enabled AI Chat Assistant:** An integrated conversational assistant built with Spring AI that uses text embeddings and a vector database to retrieve relevant context from proprietary application data, combining it with the OpenAI chat model to deliver accurate, domain-specific responses to user queries.
 
 🛍️ **Product Browsing:** Easily browse through a wide range of products.
 

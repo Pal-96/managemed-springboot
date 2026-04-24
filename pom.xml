@@ -11,7 +11,7 @@
 	<groupId>com.managemed</groupId>
 	<artifactId>managemedapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>managemedapp</name>
 	<description>ManageMed Web Application</description>
 	<url/>

@@ -74,18 +74,19 @@ public class AddRemoveService {
         }
     }
 
-    private void addProduct(String productTitle, Integer quantity, Integer unitprice, String description, HttpSession session) {
+    public Product addProduct(String productTitle, Integer quantity, Integer unitprice, String description, HttpSession session) {
         if (!productRepository.findByProduct(productTitle).isEmpty()) {
             session.setAttribute("productexists", true);
-            return;
+            return null;
         }
         product = new Product();
         product.setProduct(productTitle);
         product.setQuantity(quantity);
         product.setUnitprice(unitprice);
         product.setDescription(description);
-        productRepository.save(product);
+        Product prod = productRepository.save(product);
         session.setAttribute("quantity", quantity);
+        return prod;
     }
     
 }
